@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Bible Quiz</title>
+
+        <link rel="stylesheet" href="{% static 'vendor/bootstrap/4/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendor/fontawesome/5/css/all.min.css' %}" />
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    </head>
+    <body>
+
+        <div id="content" class="container-fluid">
+            <div class="h-100 row align-items-center justify-content-center">
+                <div class="col-md-6 col-lg-4 text-center">
+                    <div id="answer-card" class="card">
+                        <div class="card-header">
+                            Question #{{question.sequence}}
+                        </div>
+                        <div class="card-body text-center">
+                            <div id="answer-multiple-choice" class="d-none">
+                                <button type="button" class="btn btn-info btn-lg mx-2">A</button>
+                                <button type="button" class="btn btn-info btn-lg mx-2">B</button>
+                                <button type="button" class="btn btn-info btn-lg mx-2">C</button>
+                                <button type="button" class="btn btn-info btn-lg mx-2">D</button>
+                            </div>
+                            <div id="answer-true-false" class="d-none">
+                                <button type="button" class="btn btn-info btn-lg mx-2">True</button>
+                                <button type="button" class="btn btn-info btn-lg mx-2">False</button>
+                            </div>
+                            <div id="answer-identification" class="d-none">
+                                <button type="button" class="btn btn-info btn-lg mx-2">True</button>
+                                <button type="button" class="btn btn-info btn-lg mx-2">False</button>
+                            </div>
+                        </div>
+                        <div id="answer-submitted" class="card-footer d-none">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-prompt" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Submit</h5>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to submit your answer?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/4/js/bootstrap.bundle.min.js' %}"></script>
+
+        <script type="text/javascript">
+            var group = {{group|safe}};
+            var question = {{question|safe}};
+
+            $(function() {
+
+                show_answer();
+
+                $('#answer-card .btn').on('click', function() {
+                    $('#modal-prompt').modal('show');
+                });
+
+            });
+
+            function show_answer()
+            {
+                $('#answer-identification').addClass('d-none');
+                $('#answer-true-false').addClass('d-none');
+                $('#answer-multiple-choice').addClass('d-none');
+
+                if (question.choices_layout == '1x1') {
+                    $('#answer-identification').removeClass('d-none');
+                } else if (question.choices_layout == '1x2') {
+                    $('#answer-true-false').removeClass('d-none');
+                } else {
+                    $('#answer-multiple-choice').removeClass('d-none');
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="h-100">
+<html lang="en" dir="ltr">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -10,11 +10,22 @@
         <link rel="stylesheet" href="{% static 'vendor/bootstrap/4/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'vendor/fontawesome/5/css/all.min.css' %}" />
 
-    </head>
-    <body class="h-100">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-        <div class="jumbotron h-100">
-            <h1>Hello {{group.name}}</h1>
+    </head>
+    <body>
+
+        <div id="content" class="container-fluid">
+            <div class="h-100 row align-items-center justify-content-center">
+                <div class="col-md-6 col-lg-4 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="img-fluid mb-4" src="{% static 'img/sda_big.png' %}" alt="">
+                            <h1>Bible Quiz</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>

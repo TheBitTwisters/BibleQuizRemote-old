@@ -6,9 +6,15 @@ from data.models import Group, Current, Question
 
 # Create your views here.
 def index(request, group_name=''):
-    group = Group.get(group_name)
+    g = Group.get(group_name)
+    if g:
+        return group(request, g)
+    return render(request, 'game/index.html')
+
+
+def group(request, group):
     question = Current.get_value('question')
     if question:
         question = Question.get(question)
     data = { 'group': group, 'question': question }
-    return render(request, 'group/index.html', data)
+    return render(request, 'game/group.html', data)
