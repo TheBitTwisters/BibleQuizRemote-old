@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="h-100">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Bible Quiz</title>
+
+        <link rel="stylesheet" href="{% static 'vendor/bootstrap/4/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendor/fontawesome/5/css/all.min.css' %}" />
+
+    </head>
+    <body class="h-100">
+
+        <div class="jumbotron h-100">
+            <h1>Hello {{group.name}}</h1>
+        </div>
+
+        <script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/4/js/bootstrap.bundle.min.js' %}"></script>
+    </body>
+</html>
