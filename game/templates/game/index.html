@@ -23,6 +23,14 @@
                             <img class="img-fluid mb-4" src="{% static 'img/sda_big.png' %}" alt="">
                             <h1>Bible Quiz</h1>
                         </div>
+                        <div class="card-footer">
+                            <div class="input-group">
+                                <input id="form-group-input" type="text" class="form-control" placeholder="Enter group's name">
+                                <div class="input-group-append">
+                                    <button id="form-group-btn" class="btn btn-outline-secondary" type="button">OK</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,5 +38,17 @@
 
         <script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
         <script src="{% static 'vendor/bootstrap/4/js/bootstrap.bundle.min.js' %}"></script>
+
+        <script type="text/javascript">
+            $(function() {
+
+                $('#form-group-btn').on('click', function() {
+                    url = '{% url 'game:index' %}';
+                    url += $('#form-group-input').val();
+                    window.location.href = url;
+                });
+
+            });
+        </script>
     </body>
 </html>
