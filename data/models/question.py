@@ -1,10 +1,8 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class Question(models.Model):
-    sequence = models.IntegerField()
-    question_statement = models.CharField(max_length=30, blank=False)
-    choices_layout = models.CharField(max_length=3, blank=False)
 
     @classmethod
     def get(cls, id):
@@ -20,4 +18,4 @@ class Question(models.Model):
                 'question_statement': question[0].question_statement,
                 'choices_layout': question[0].choices_layout
             }
-        return False
+        return None

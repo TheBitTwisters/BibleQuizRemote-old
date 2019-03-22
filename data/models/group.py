@@ -1,8 +1,8 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class Group(models.Model):
-    name = models.CharField(max_length=15, blank=False)
 
     @classmethod
     def get(cls, name):
