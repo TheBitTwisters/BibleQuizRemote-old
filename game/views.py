@@ -2,19 +2,35 @@ import json
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from data.models import Group, Current, Question
+from data.models import Group, Current, Question, Answer
 
-# Create your views here.
+
 def index(request, group_name=''):
-    g = Group.get(group_name)
-    if g:
-        return group(request, g)
+    group = Group.get(group_name)
+    if group:
+        return render(request, 'game/group.html', { 'group': group })
     return render(request, 'game/index.html')
 
 
-def group(request, group):
-    question = Current.get_value('question')
-    if question:
-        question = Question.get(question)
-    data = { 'group': group, 'question': question }
-    return render(request, 'game/group.html', data)
+def monitor(request):
+    group_id = request.POST.get('group_id', 0)
+    question_id = int(Current.get_value('question', 0))
+    question = False
+    answer = ''
+    if question_id:
+        question = Question.get(question_id)
+        answer = Answer.get(question['id'], group_id)
+    return JsonResponse({
+        'question': question,
+        'answer': answer
+    })
+
+
+def submit(request):
+    group_id = request.POST.get('group_id', 0)
+    question_id = request.POST.get('question_id', 0)
+    submitted_answer = request.POST.get('answer', '')
+    Answer.set(question_id, group_id, submitted_answer)
+    return JsonResponse({
+        'ok': 0
+    })
